@@ -6,9 +6,9 @@
     <string name="title_scannedLogs">View Scanned Logs</string>
     <string name="title_scannedLogsList">Scanned Logs</string>
     <string name="title_qrContent">Update Content of QR Codes</string>
-    <string name="title_qrContentPage">Scan QR Code</string>
+    <string name="title_qrContentPage">Tap content to update</string>
     <string name="title_transMessage">Update Transition Messages</string>
-    <string name="title_transMessageList">Transition Messages</string>
+    <string name="title_transMessageList">Tap message to update</string>
     <string name="title_helpAlerts">View Help Alerts</string>
     <string name="title_helpAlertsList">Help Alerts</string>
 </resources>
