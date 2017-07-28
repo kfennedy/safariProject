@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView android:id="@+id/list_alerts_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/menu_title"
+        android:textColor="@color/white"
+        android:padding="@dimen/menu_title_padding"
+        android:background="@color/helpAlerts"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:text="@string/title_helpAlertsList"/>
+
+    <ListView android:id="@+id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
+        android:drawSelectorOnTop="false">
+    </ListView>
+
+
+</LinearLayout>
+

@@ -6,16 +6,45 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:description="@string/app_description"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
 
-        <activity android:name=".HomeTeacher">
+        <activity
+            android:name=".ActivityLauncher"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".LogsLauncher"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+
+        <activity
+            android:name=".ContentLauncher"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+
+        <activity
+            android:name=".MessagesLauncher"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+
+        <activity
+            android:name=".AlertsLauncher"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat">
         </activity>
 
 
