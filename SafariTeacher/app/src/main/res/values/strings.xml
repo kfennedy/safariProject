@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SafariTeacher</string>
+    <string name="app_description">Made easy for any teacher to teach</string>
+
+    <string name="title_home">Welcome to Safari Teachers</string>
+    <string name="title_scannedLogs">View All Scanned Logs</string>
+    <string name="title_qrContent">View All Scanned Logs</string>
+    <string name="title_transMessage">View All Scanned Logs</string>
+    <string name="title_helpAlerts">View All Scanned Logs</string>
+</resources>
