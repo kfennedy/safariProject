@@ -15,7 +15,7 @@
         android:background="@color/qrContent"
         android:fontFamily="sans-serif"
         android:textStyle="bold"
-        android:text="@string/title_qrContentPage"/>
+        android:text="@string/title_qrContentPage" />
 
 </LinearLayout>
 
