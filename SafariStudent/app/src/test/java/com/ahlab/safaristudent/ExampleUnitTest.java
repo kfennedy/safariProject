@@ -1,4 +1,4 @@
-package com.ahlab.safariteacher;
+package com.ahlab.safaristudent;
 
 import org.junit.Test;
 
