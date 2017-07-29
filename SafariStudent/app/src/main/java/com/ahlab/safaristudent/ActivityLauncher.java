@@ -23,8 +23,8 @@ import com.google.zxing.Result;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Locale;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -38,6 +38,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     DatabaseReference dbMessages;
     DatabaseReference dbMappings;
     DatabaseReference dbLogs;
+    ArrayList<Message> messagesList;
     TextToSpeech tts;
     String dateTime;
     String studentName = "unknown";
@@ -53,12 +54,11 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 
         dbLogs = FirebaseDatabase.getInstance().getReference("logs");
         tts = new TextToSpeech(getApplicationContext(), this);
+        messagesList = new ArrayList<>();
+        pullMessagesFromCloud();
+
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
 
     public void scan(){
         zXingScannerView = new ZXingScannerView(getApplicationContext());
@@ -109,9 +109,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
                     studentName = qrContent;
                     processMessage2();
                 } else {
-                    String aha = studentName + "'s content is " + qrContent;
-                    tts.speak(aha, TextToSpeech.QUEUE_ADD, null);
-
+                    tts.speak(qrContent, TextToSpeech.QUEUE_ADD, null);
                     Log log = new Log(dateTime, studentName, qrName, qrContent);
                     dbLogs.child(dateTime).setValue(log);
 
@@ -128,72 +126,45 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         });
     }
 
-    public void processMessage1(View view1){
-        tts = new TextToSpeech(getApplicationContext(), this);
-
+    public void pullMessagesFromCloud(){
+        messagesList.clear();
         dbMessages = FirebaseDatabase.getInstance().getReference("messages");
-        dbMessages.runTransaction(new Transaction.Handler() {
+        dbMessages.addValueEventListener(new ValueEventListener() {
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
-                if (mutableData.getValue() != null){
-                    dbMessages.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            message1 = dataSnapshot.child("message1").getValue().toString();
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {}
-                    });
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data: dataSnapshot.getChildren()){
+                    Message message = new Message(data.getKey(), data.getValue().toString());
+                    messagesList.add(message);
                 }
-                return Transaction.success(mutableData);
             }
-
             @Override
-            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-                tts.speak(message1, TextToSpeech.QUEUE_FLUSH, null);
-                scan();
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
-
+        Toast.makeText(getApplicationContext(), "completes syncing", Toast.LENGTH_SHORT).show();
     }
 
+    public void processMessage1(View view1){
+        message1 = messagesList.get(0).getMessageContent();
+        tts.speak(message1, TextToSpeech.QUEUE_FLUSH, null);
+        scan();
+    }
+
+    // if QR009 - QR0010 is scanned
     public void processMessage2(){
-        tts = new TextToSpeech(getApplicationContext(), this);
+        message2 = messagesList.get(1).getMessageContent();
+        String aha = "Hi " + studentName + ". " + message2;
+        tts.speak(aha, TextToSpeech.QUEUE_FLUSH, null);
 
-        dbMessages = FirebaseDatabase.getInstance().getReference("messages");
-        dbMessages.runTransaction(new Transaction.Handler() {
+        Log log = new Log(dateTime, studentName, qrName, qrContent);
+        dbLogs.child(dateTime).setValue(log);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public Transaction.Result doTransaction(MutableData mutableData) {
-                if (mutableData.getValue() != null){
-                    dbMessages.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            message2 = dataSnapshot.child("message2").getValue().toString();
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {}
-                    });
-                }
-                return Transaction.success(mutableData);
+            public void run() {
+                zXingScannerView.resumeCameraPreview(resultHandler);
             }
-
-            @Override
-            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-                String aha = "Hi " + studentName + ". " + message2;
-                tts.speak(aha, TextToSpeech.QUEUE_FLUSH, null);
-
-                Log log = new Log(dateTime, studentName, qrName, qrContent);
-                dbLogs.child(dateTime).setValue(log);
-
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        zXingScannerView.resumeCameraPreview(resultHandler);
-                    }
-                }, 2000);
-            }
-        });
+        }, 2000);
 
     }
 
@@ -210,4 +181,5 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         }
 
     }
+
 }
