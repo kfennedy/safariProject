@@ -2,10 +2,16 @@ package com.ahlab.safaristudent;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,6 +24,7 @@ import com.google.zxing.Result;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -26,14 +33,18 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 
 public class ActivityLauncher extends Activity implements OnInitListener, ZXingScannerView.ResultHandler{
 
-    private ZXingScannerView zXingScannerView;
-    private DatabaseReference dbMappings;
-    private DatabaseReference dbLogs;
-    private ZXingScannerView.ResultHandler resultHandler;
-    public TextToSpeech tts;
+    ZXingScannerView zXingScannerView;
+    ZXingScannerView.ResultHandler resultHandler;
+    DatabaseReference dbMessages;
+    DatabaseReference dbMappings;
+    DatabaseReference dbLogs;
+    TextToSpeech tts;
     String dateTime;
+    String studentName = "unknown";
     String qrName;
     String qrContent;
+    String message1;
+    String message2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +55,12 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         tts = new TextToSpeech(getApplicationContext(), this);
     }
 
-    public void scan(View view){
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    public void scan(){
         zXingScannerView = new ZXingScannerView(getApplicationContext());
         setContentView(zXingScannerView);
         zXingScannerView.setResultHandler(this);
@@ -88,20 +104,101 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 
             @Override
             public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-                Log log = new Log(dateTime, "katherine", qrName, qrContent);
-                dbLogs.child(dateTime).setValue(log);
 
-                if (qrContent != null){
-                    String audioContent = "Katherine's content is " + qrContent;
-                    tts.speak(audioContent, TextToSpeech.QUEUE_FLUSH, null);
+                if (qrName.equals("QR009") || qrName.equals("QR010")){
+                    studentName = qrContent;
+                    processMessage2();
+                } else {
+                    String aha = studentName + "'s content is " + qrContent;
+                    tts.speak(aha, TextToSpeech.QUEUE_ADD, null);
+
+                    Log log = new Log(dateTime, studentName, qrName, qrContent);
+                    dbLogs.child(dateTime).setValue(log);
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            zXingScannerView.resumeCameraPreview(resultHandler);
+                        }
+                    }, 2000);
+
                 }
-                zXingScannerView.resumeCameraPreview(resultHandler);
             }
         });
     }
 
+    public void processMessage1(View view1){
+        tts = new TextToSpeech(getApplicationContext(), this);
+
+        dbMessages = FirebaseDatabase.getInstance().getReference("messages");
+        dbMessages.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                if (mutableData.getValue() != null){
+                    dbMessages.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            message1 = dataSnapshot.child("message1").getValue().toString();
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {}
+                    });
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                tts.speak(message1, TextToSpeech.QUEUE_FLUSH, null);
+                scan();
+            }
+        });
+
+    }
+
+    public void processMessage2(){
+        tts = new TextToSpeech(getApplicationContext(), this);
+
+        dbMessages = FirebaseDatabase.getInstance().getReference("messages");
+        dbMessages.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                if (mutableData.getValue() != null){
+                    dbMessages.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            message2 = dataSnapshot.child("message2").getValue().toString();
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {}
+                    });
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                String aha = "Hi " + studentName + ". " + message2;
+                tts.speak(aha, TextToSpeech.QUEUE_FLUSH, null);
+
+                Log log = new Log(dateTime, studentName, qrName, qrContent);
+                dbLogs.child(dateTime).setValue(log);
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        zXingScannerView.resumeCameraPreview(resultHandler);
+                    }
+                }, 2000);
+            }
+        });
+
+    }
+
     public String getDateTimeNow(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
         Calendar cal = Calendar.getInstance();
         String dateTime = dateFormat.format(cal.getTime()).replace('/','|');
         return dateTime;
@@ -111,5 +208,6 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         if (initStatus == TextToSpeech.SUCCESS) {
             tts.setLanguage(Locale.US);
         }
+
     }
 }
