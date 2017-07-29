@@ -35,6 +35,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     DatabaseReference dbMappings;
     DatabaseReference dbLogs;
     DatabaseReference dbSettings;
+    DatabaseReference dbAlerts;
     Settings settings;
     ArrayList<Message> messagesList;
     TextToSpeech tts;
@@ -58,6 +59,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 
         dbLogs = FirebaseDatabase.getInstance().getReference("logs");
         dbSettings = FirebaseDatabase.getInstance().getReference("settings");
+        dbAlerts = FirebaseDatabase.getInstance().getReference("alerts");
         tts = new TextToSpeech(getApplicationContext(), this);
         messagesList = new ArrayList<>();
 
@@ -238,16 +240,22 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 
     // trigger temp alert
     public void startSM1(int duration, final int interval){
-        System.out.println("============ SM 1 started =============");
+//        System.out.println("============ SM 1 started =============");
 
         timer = new CountDownTimer(duration, interval) {
             public void onTick(long millisUntilFinished) {
-                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
+//                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
             }
 
             public void onFinish() {
-                // firebase temp alert
-                System.out.println("========== SM 1 completed ============");
+//                System.out.println("========== SM 1 completed ============");
+
+                dateTime = getDateTimeNow();
+                int duration = (durationTemp/1000);
+                Alert alert = new Alert(dateTime, studentName, "temporary", String.valueOf(duration));
+                dbAlerts.child(dateTime).setValue(alert);
+                Toast.makeText(getApplicationContext(), "Temporary alert has been sent to teacher", Toast.LENGTH_SHORT).show();
+
                 startSM2(durationUrgent, durationInterval);
             }
         }.start();
@@ -256,17 +264,23 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     // trigger urgent alert
     public void startSM2(int duration, final int interval){
 
-        System.out.println("============ SM 2 started =============");
+//        System.out.println("============ SM 2 started =============");
 
         timer = new CountDownTimer(duration, interval) {
             public void onTick(long millisUntilFinished) {
-                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
+//                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
             }
 
             public void onFinish() {
-                // firebase urgent alert
-                System.out.println("========== SM 2 completed ============");
-                startSM1(durationUrgent,durationInterval);
+//                System.out.println("========== SM 2 completed ============");
+
+                dateTime = getDateTimeNow();
+                int duration = (durationUrgent/1000);
+                Alert alert = new Alert(dateTime, studentName, "urgent", String.valueOf(duration));
+                dbAlerts.child(dateTime).setValue(alert);
+                Toast.makeText(getApplicationContext(), "Urgent alert has been sent to teacher", Toast.LENGTH_SHORT).show();
+
+                startSM2(durationUrgent,durationInterval);
             }
         }.start();
     }
