@@ -2,6 +2,7 @@ package com.ahlab.safaristudent;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
@@ -33,6 +34,8 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     DatabaseReference dbMessages;
     DatabaseReference dbMappings;
     DatabaseReference dbLogs;
+    DatabaseReference dbSettings;
+    Settings settings;
     ArrayList<Message> messagesList;
     TextToSpeech tts;
     String dateTime;
@@ -42,7 +45,11 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     String message0;
     String message1;
     Integer maxCount = 0;
+    CountDownTimer timer;
     Integer delayTime = 3000;
+    Integer durationTemp;
+    Integer durationUrgent;
+    Integer durationInterval = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +57,11 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         setContentView(R.layout.home_student);
 
         dbLogs = FirebaseDatabase.getInstance().getReference("logs");
+        dbSettings = FirebaseDatabase.getInstance().getReference("settings");
         tts = new TextToSpeech(getApplicationContext(), this);
         messagesList = new ArrayList<>();
-        pullMessagesFromCloud();
+
+        pullSettingsFromCloud();
     }
 
 
@@ -65,12 +74,6 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        zXingScannerView.stopCamera();
-    }
-
-    @Override
     public void handleResult(Result result) {
 
         dateTime = getDateTimeNow();
@@ -79,6 +82,10 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         dbLogs.child(dateTime).setValue(log);
         Toast.makeText(getApplicationContext(), qrName, Toast.LENGTH_SHORT).show();
         maxCount += 1;
+
+        // refresh state machine
+        timer.cancel();
+        startSM1(durationTemp, durationInterval);
 
         if (maxCount <= messagesList.size()-2){
 //            System.out.println("============maxCount=============== " + maxCount);
@@ -97,6 +104,38 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 //            System.out.println("============maxCount=============== " + maxCount);
             processInteraction();
         }
+
+    }
+
+    public void pullSettingsFromCloud(){
+        dbSettings.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                if (mutableData.getValue() != null){
+                    dbSettings.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String duration1 = dataSnapshot.child("durationTemp").getValue().toString();
+                            String duration2 = dataSnapshot.child("durationUrgent").getValue().toString();
+                            int dur1 = Integer.valueOf(duration1);
+                            int dur2 = Integer.valueOf(duration2);
+                            settings = new Settings(dur1,dur2);
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+                }
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
+                durationTemp = settings.getDurationTemp()*1000;
+                durationUrgent = settings.getDurationUrgent()*1000;
+                pullMessagesFromCloud();
+            }
+        });
 
     }
 
@@ -155,7 +194,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 
                 if (qrName.equals("QR009") || qrName.equals("QR010")){
                     studentName = qrContent;
-                    processMessage2();
+                    processMessage1();
                 } else {
                     tts.speak(qrContent, TextToSpeech.QUEUE_ADD, null);
 
@@ -166,20 +205,21 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
                             zXingScannerView.resumeCameraPreview(resultHandler);
                         }
                     }, delayTime);
-
                 }
             }
         });
     }
 
-    public void processMessage1(View view1){
+    // this method is invoked from xml file's button
+    public void processMessage0(View view1){
         message0 = messagesList.get(0).getMessageContent();
         tts.speak(message0, TextToSpeech.QUEUE_FLUSH, null);
+        startSM1(durationTemp, durationInterval);
         scan();
     }
 
-    // if QR009 - QR0010 is scanned
-    public void processMessage2(){
+    // if studentName QR codes are scanned
+    public void processMessage1(){
         maxCount = 1;
         message1 = messagesList.get(1).getMessageContent();
 
@@ -194,6 +234,60 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
                 zXingScannerView.resumeCameraPreview(resultHandler);
             }
         }, delayTime);
+    }
+
+    // trigger temp alert
+    public void startSM1(int duration, final int interval){
+        System.out.println("============ SM 1 started =============");
+
+        timer = new CountDownTimer(duration, interval) {
+            public void onTick(long millisUntilFinished) {
+                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
+            }
+
+            public void onFinish() {
+                // firebase temp alert
+                System.out.println("========== SM 1 completed ============");
+                startSM2(durationUrgent, durationInterval);
+            }
+        }.start();
+    }
+
+    // trigger urgent alert
+    public void startSM2(int duration, final int interval){
+
+        System.out.println("============ SM 2 started =============");
+
+        timer = new CountDownTimer(duration, interval) {
+            public void onTick(long millisUntilFinished) {
+                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
+            }
+
+            public void onFinish() {
+                // firebase urgent alert
+                System.out.println("========== SM 2 completed ============");
+                startSM1(durationUrgent,durationInterval);
+            }
+        }.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        zXingScannerView.stopCamera();
+        timer.cancel();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        timer.cancel();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
     }
 
     public String getDateTimeNow(){
