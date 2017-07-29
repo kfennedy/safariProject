@@ -9,9 +9,10 @@ import android.widget.Button;
 public class ActivityLauncher extends Activity {
 
     Button buttonScannedLogs;
+    Button buttonHelpAlerts;
     Button buttonQRcontent;
     Button buttonTransMessage;
-    Button buttonHelpAlerts;
+    Button buttonSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,15 @@ public class ActivityLauncher extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityLauncher.this, LogsLauncher.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonHelpAlerts = (Button) findViewById(R.id.buttonHelpAlerts);
+        buttonHelpAlerts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityLauncher.this, AlertsLauncher.class);
                 startActivity(intent);
             }
         });
@@ -45,11 +55,11 @@ public class ActivityLauncher extends Activity {
             }
         });
 
-        buttonHelpAlerts = (Button) findViewById(R.id.buttonHelpAlerts);
-        buttonHelpAlerts.setOnClickListener(new View.OnClickListener() {
+        buttonSettings = (Button) findViewById(R.id.buttonSettings);
+        buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityLauncher.this, AlertsLauncher.class);
+                Intent intent = new Intent(ActivityLauncher.this, SettingsLauncher.class);
                 startActivity(intent);
             }
         });

@@ -31,6 +31,13 @@
         </activity>
 
         <activity
+            android:name=".AlertsLauncher"
+            android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
+
+        <activity
             android:name=".ContentLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:theme="@style/Theme.AppCompat">
@@ -43,9 +50,8 @@
         </activity>
 
         <activity
-            android:name=".AlertsLauncher"
+            android:name=".SettingsLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat">
         </activity>
 

@@ -11,4 +11,6 @@
     <string name="title_transMessageList">Tap message to update</string>
     <string name="title_helpAlerts">View Help Alerts</string>
     <string name="title_helpAlertsList">Help Alerts</string>
+    <string name="title_settings">Update Settings</string>
+    <string name="title_settingsPage">Tap setting to update</string>
 </resources>

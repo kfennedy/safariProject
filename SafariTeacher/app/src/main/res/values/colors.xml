@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="scannedLogs">#2ecc71</color>
-    <color name="qrContent">#f1c40f</color>
+    <color name="scannedLogs">#9b59b6</color>
+    <color name="helpAlerts">#e74c3c</color>
+    <color name="qrContent">#2ecc71</color>
     <color name="transMessage">#3498db</color>
-    <color name="helpAlerts">#9b59b6</color>
-    <!--<color name="analytics">#e74c3c</color>-->
+    <color name="settings">#f1c40f</color>
 
     <!--<color name="extra">#34495e</color>-->
 
