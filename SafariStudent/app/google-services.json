@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "155252943276",
+    "firebase_url": "https://safari2-a316c.firebaseio.com",
+    "project_id": "safari2-a316c",
+    "storage_bucket": "safari2-a316c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155252943276:android:febd28304a8402eb",
+        "android_client_info": {
+          "package_name": "com.ahlab.safaristudent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155252943276-1tgh7dl4ek82h8slf1jd5m2qjdit16rg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ahlab.safaristudent",
+            "certificate_hash": "2d34170538df60e9a93ce59c52c7d28e4cef3034"
+          }
+        },
+        {
+          "client_id": "155252943276-87uu5g4qf7tbu8rcsb131aijeu1mt5ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdxu1roWLylsImdaX8IxYs2QYrrzuuG_o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155252943276-87uu5g4qf7tbu8rcsb131aijeu1mt5ij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
