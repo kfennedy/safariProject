@@ -7,7 +7,7 @@
     android:weightSum="4">
 
     <TextView
-        android:id="@+id/dateTimeView"
+        android:id="@+id/dateTime"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
         android:textSize="16dp" />
 
     <TextView
-        android:id="@+id/studentView"
+        android:id="@+id/studentName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"
@@ -29,18 +29,18 @@
         android:textSize="16dp" />
 
     <TextView
-        android:id="@+id/qrID"
+        android:id="@+id/qrName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="QR ID"
+        android:text="QR name"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="16dp" />
 
     <TextView
-        android:id="@+id/QR_content"
+        android:id="@+id/qrContent"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_weight="1"

@@ -41,8 +41,8 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     TextToSpeech tts;
     String dateTime;
     String studentName = "unknown";
-    String qrName;
-    String qrContent;
+    String qrName = "";
+    String qrContent = "";
     String message0;
     String message1;
     Integer maxCount = 0;
@@ -78,10 +78,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     @Override
     public void handleResult(Result result) {
 
-        dateTime = getDateTimeNow();
         qrName = result.getText();
-        Log log = new Log(dateTime, studentName, qrName, qrContent);
-        dbLogs.child(dateTime).setValue(log);
         Toast.makeText(getApplicationContext(), qrName, Toast.LENGTH_SHORT).show();
         maxCount += 1;
 
@@ -180,6 +177,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             System.out.println(dataSnapshot.child(qrName));
                             qrContent = dataSnapshot.child(qrName).getValue().toString();
+//                            System.out.println("========processInteraction========= " + qrContent);
                         }
 
                         @Override
@@ -198,6 +196,11 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
                     studentName = qrContent;
                     processMessage1();
                 } else {
+                    dateTime = getDateTimeNow();
+//                    System.out.println("========onComplete(process interaction)========= " + qrContent);
+                    Log log = new Log(dateTime, studentName, qrName, qrContent);
+                    dbLogs.child(dateTime).setValue(log);
+
                     tts.speak(qrContent, TextToSpeech.QUEUE_ADD, null);
 
                     final Handler handler = new Handler();
@@ -223,6 +226,12 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     // if studentName QR codes are scanned
     public void processMessage1(){
         maxCount = 1;
+        qrContent = studentName;
+        dateTime = getDateTimeNow();
+//        System.out.println("========processMessage1========= " + qrContent);
+        Log log = new Log(getDateTimeNow(), studentName, qrName, qrContent);
+        dbLogs.child(dateTime).setValue(log);
+
         message1 = messagesList.get(1).getMessageContent();
 
         //TODO: need to customise the studentName from teacher's app
