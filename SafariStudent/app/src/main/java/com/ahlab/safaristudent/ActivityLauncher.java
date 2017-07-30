@@ -94,7 +94,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
                 @Override
                 public void run() {
                     String aha = messagesList.get(maxCount+1).getMessageContent();
-                    tts.speak(aha, TextToSpeech.QUEUE_ADD, null);
+                    tts.speak(replaceSubString(aha), TextToSpeech.QUEUE_ADD, null);
 //                    System.out.println("============message spoken=============== " + aha);
                 }
             }, delayTime);
@@ -201,7 +201,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
                     Log log = new Log(dateTime, studentName, qrName, qrContent);
                     dbLogs.child(dateTime).setValue(log);
 
-                    tts.speak(qrContent, TextToSpeech.QUEUE_ADD, null);
+                    tts.speak(replaceSubString(qrContent), TextToSpeech.QUEUE_ADD, null);
 
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -218,7 +218,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
     // this method is invoked from xml file's button
     public void processMessage0(View view1){
         message0 = messagesList.get(0).getMessageContent();
-        tts.speak(message0, TextToSpeech.QUEUE_FLUSH, null);
+        tts.speak(replaceSubString(message0), TextToSpeech.QUEUE_FLUSH, null);
         startSM1(durationTemp, durationInterval);
         scan();
     }
@@ -233,7 +233,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         dbLogs.child(dateTime).setValue(log);
 
         message1 = messagesList.get(1).getMessageContent();
-        tts.speak(message1, TextToSpeech.QUEUE_ADD, null);
+        tts.speak(replaceSubString(message1), TextToSpeech.QUEUE_ADD, null);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -256,7 +256,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
             public void onFinish() {
 //                System.out.println("========== SM 1 completed ============");
                 String tempMessage = messagesList.get(messagesList.size()-2).getMessageContent();
-                tts.speak(tempMessage, TextToSpeech.QUEUE_ADD, null);
+                tts.speak(replaceSubString(tempMessage), TextToSpeech.QUEUE_ADD, null);
                 
                 dateTime = getDateTimeNow();
                 int duration = (durationTemp/1000);
@@ -282,7 +282,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
             public void onFinish() {
 //                System.out.println("========== SM 2 completed ============");
                 String alertMessage = messagesList.get(messagesList.size()-1).getMessageContent();
-                tts.speak(alertMessage, TextToSpeech.QUEUE_ADD, null);
+                tts.speak(replaceSubString(alertMessage), TextToSpeech.QUEUE_ADD, null);
 
                 dateTime = getDateTimeNow();
                 int duration = (durationUrgent/1000);
@@ -326,6 +326,15 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
             tts.setLanguage(Locale.US);
         }
 
+    }
+
+    public String replaceSubString(String string){
+        if (string.contains("@studentName")){
+            String newString = string.replace("@studentName", studentName);
+            return newString;
+        } else {
+            return string;
+        }
     }
 
 }
