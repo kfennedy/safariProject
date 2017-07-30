@@ -86,7 +86,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         timer.cancel();
         startSM1(durationTemp, durationInterval);
 
-        if (maxCount <= messagesList.size()-2){
+        if (maxCount <= messagesList.size()-4){
 //            System.out.println("============maxCount=============== " + maxCount);
 
             final Handler handler = new Handler();
@@ -233,10 +233,7 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
         dbLogs.child(dateTime).setValue(log);
 
         message1 = messagesList.get(1).getMessageContent();
-
-        //TODO: need to customise the studentName from teacher's app
-        String aha = "Hi " + studentName + ". " + message1;
-        tts.speak(aha, TextToSpeech.QUEUE_FLUSH, null);
+        tts.speak(message1, TextToSpeech.QUEUE_ADD, null);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -258,7 +255,9 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 
             public void onFinish() {
 //                System.out.println("========== SM 1 completed ============");
-
+                String tempMessage = messagesList.get(messagesList.size()-2).getMessageContent();
+                tts.speak(tempMessage, TextToSpeech.QUEUE_ADD, null);
+                
                 dateTime = getDateTimeNow();
                 int duration = (durationTemp/1000);
                 Alert alert = new Alert(dateTime, studentName, "temporary", String.valueOf(duration));
@@ -282,6 +281,8 @@ public class ActivityLauncher extends Activity implements OnInitListener, ZXingS
 
             public void onFinish() {
 //                System.out.println("========== SM 2 completed ============");
+                String alertMessage = messagesList.get(messagesList.size()-1).getMessageContent();
+                tts.speak(alertMessage, TextToSpeech.QUEUE_ADD, null);
 
                 dateTime = getDateTimeNow();
                 int duration = (durationUrgent/1000);
