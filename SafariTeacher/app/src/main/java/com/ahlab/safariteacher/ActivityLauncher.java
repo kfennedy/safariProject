@@ -41,7 +41,7 @@ public class ActivityLauncher extends Activity {
         buttonQRcontent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityLauncher.this, ContentLauncher.class);
+                Intent intent = new Intent(ActivityLauncher.this, MappingLauncher.class);
                 startActivity(intent);
             }
         });

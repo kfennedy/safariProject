@@ -33,7 +33,7 @@
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat"></activity>
         <activity
-            android:name=".ContentLauncher"
+            android:name=".MappingLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:theme="@style/Theme.AppCompat"></activity>
         <activity
