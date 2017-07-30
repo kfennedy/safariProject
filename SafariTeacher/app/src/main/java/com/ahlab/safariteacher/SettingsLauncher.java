@@ -165,12 +165,10 @@ public class SettingsLauncher extends Activity {
 
     public void promptDialog(final String alertType, final String contentType){
 
-        View promptsView;
-
         LayoutInflater inflater = this.getLayoutInflater();
-        promptsView = inflater.inflate(R.layout.dialog_edit_content, null);
+        View promptsView = inflater.inflate(R.layout.dialog_edit_content, null);
 
-        final EditText userInput = (EditText) promptsView.findViewById(R.id.userInput);
+        final EditText userInput = promptsView.findViewById(R.id.userInput);
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setView(promptsView);
