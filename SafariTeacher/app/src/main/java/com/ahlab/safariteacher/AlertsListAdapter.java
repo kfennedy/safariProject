@@ -42,7 +42,7 @@ public class AlertsListAdapter extends ArrayAdapter<Alert> {
         alertTypeView.setText(alert.getAlertType());
 
         TextView durationView = listViewAlerts.findViewById(R.id.durationElapsed);
-        durationView.setText(alert.getDurationElapsed());
+        durationView.setText(alert.getDurationElapsed() + " sec");
 
         return listViewAlerts;
 

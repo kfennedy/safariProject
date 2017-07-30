@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
-    android:weightSum="4">
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/dateTime"
-        android:layout_width="match_parent"
+        android:layout_width="166dp"
         android:layout_height="50dp"
-        android:layout_weight="1"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:text="dateTimeStamp"
         android:textAlignment="center"
@@ -19,9 +18,9 @@
 
     <TextView
         android:id="@+id/studentName"
-        android:layout_width="match_parent"
+        android:layout_width="106dp"
         android:layout_height="50dp"
-        android:layout_weight="1"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:text="studentName"
         android:textAlignment="center"
@@ -30,9 +29,9 @@
 
     <TextView
         android:id="@+id/qrName"
-        android:layout_width="match_parent"
+        android:layout_width="74dp"
         android:layout_height="50dp"
-        android:layout_weight="1"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:text="QR name"
         android:textAlignment="center"
@@ -43,7 +42,7 @@
         android:id="@+id/qrContent"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_weight="1"
+        android:layout_margin="5dp"
         android:gravity="center"
         android:text="QR content"
         android:textAlignment="center"
