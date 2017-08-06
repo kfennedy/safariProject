@@ -439,7 +439,8 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
         }
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1600, 1024)
+//                .setRequestedPreviewSize(1600, 1024)
+                .setRequestedPreviewSize(1700, 1088) // not sure how to get it full screen, this one has a side bar
                 .setRequestedFps(15.0f);
 
         builder.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
