@@ -19,7 +19,7 @@ public class ActivityLauncher extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_teacher);
 
-        buttonScannedLogs = (Button) findViewById(R.id.buttonScannedLogs);
+        buttonScannedLogs = findViewById(R.id.buttonScannedLogs);
         buttonScannedLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,7 +28,7 @@ public class ActivityLauncher extends Activity {
             }
         });
 
-        buttonHelpAlerts = (Button) findViewById(R.id.buttonHelpAlerts);
+        buttonHelpAlerts = findViewById(R.id.buttonHelpAlerts);
         buttonHelpAlerts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,7 +37,7 @@ public class ActivityLauncher extends Activity {
             }
         });
 
-        buttonQRcontent = (Button) findViewById(R.id.buttonQRcontent);
+        buttonQRcontent = findViewById(R.id.buttonQRcontent);
         buttonQRcontent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +46,7 @@ public class ActivityLauncher extends Activity {
             }
         });
 
-        buttonTransMessage = (Button) findViewById(R.id.buttonTransMessage);
+        buttonTransMessage = findViewById(R.id.buttonTransMessage);
         buttonTransMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +55,7 @@ public class ActivityLauncher extends Activity {
             }
         });
 
-        buttonSettings = (Button) findViewById(R.id.buttonSettings);
+        buttonSettings = findViewById(R.id.buttonSettings);
         buttonSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

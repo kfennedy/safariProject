@@ -26,24 +26,24 @@
             android:name=".LogsLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name=".AlertsLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name=".MappingLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name=".MessagesLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name=".SettingsLauncher"
             android:configChanges="orientation|keyboardHidden|screenSize|smallestScreenSize"
-            android:theme="@style/Theme.AppCompat"></activity>
+            android:theme="@style/Theme.AppCompat"/>
     </application>
 
 </manifest>
