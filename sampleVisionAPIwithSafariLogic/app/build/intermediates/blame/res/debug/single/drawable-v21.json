@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/drawable-v21/abc_btn_colored_material.xml"
+    }
+]

@@ -308,6 +308,7 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
         if (maxCount <= messagesList.size()-4){
             String aha = messagesList.get(maxCount+1).getMessageContent();
             tts.speak(replaceSubString(aha), TextToSpeech.QUEUE_ADD, null);
+            startSM1(durationTemp, durationInterval);
         }
     }
 
@@ -340,6 +341,7 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
     public void startSM2(int duration, final int interval){
 
 //        System.out.println("============ SM 2 started =============");
+        timer.cancel();
 
         timer = new CountDownTimer(duration, interval) {
             public void onTick(long millisUntilFinished) {

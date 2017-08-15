@@ -1,0 +1,28 @@
+{
+  "mappings" : {
+    "QR001" : "This is a bird. Birds can fly.",
+    "QR002" : "This is a cat. Cats love fish.",
+    "QR003" : "This is a dog. Dog has four legs.",
+    "QR004" : "This is Universal Studio. What is your favourite ride?",
+    "QR005" : "This is the Singapore Zoo. There are lots of interesting animals there. ",
+    "QR006" : "This is Changi Airport. There is a huge slide within the building, remember?  ",
+    "QR007" : "There are five circles. Count with me. One Two Three Four Five.",
+    "QR008" : "There are 3 triangles. One Two Three.",
+    "QR009" : "Alice",
+    "QR010" : "Bob"
+  },
+  "messages" : {
+    "message0" : "Hi there, how are you? My name is Buddy. What is your name?",
+    "message1" : "Hello @studentName, nice to meet you.",
+    "message2" : "Can you find a bird?",
+    "message3" : "Can you find a cat?",
+    "message4" : "Can you find a dog?",
+    "message5" : "Great, that was fun! Now why don't you try exploring on your own.",
+    "message6" : "Hi @studentName, do you want to ask teacher for help?",
+    "message7" : "Don't worry @studentName, teacher has been notified, and she will help you shortly."
+  },
+  "settings" : {
+    "durationTemp" : 20,
+    "durationUrgent" : 30
+  }
+}

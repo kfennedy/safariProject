@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/katherine/.android/build-cache/904d92529edae40e4b732768bd5c496430a6c031/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="375df071e6c70b68bd90dc3b9b8a4b95061d9778">
+        <dex dex="/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/pre-dexed/debug/classes_e8f7caf084e44b864208e49cdc829c9c99ac5a36.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/katherine/.android/build-cache/f0bb740cc4661a5419b286b4ae82be8e48d44d7d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1b12397bc9f342b29d9e9108978828f99a6da579">
+        <dex dex="/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/pre-dexed/debug/classes_826d6ad56ee19764533443afc82e4d7a59dfb02c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/katherine/.android/build-cache/a85382f76de91aefffa947c6637be317c038ae62/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7c24e2e9773fb498e390ce973db382c3ddcf748e">
+        <dex dex="/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/pre-dexed/debug/classes_26e45c593bc19e8672c464051f63b179eeea7f58.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/katherine/.android/build-cache/d02fb0e026b4785243faef3d18b705858c6ce1e5/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="43d2d05483227ac2311d65919c56f4cb7efc3b20">
+        <dex dex="/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/pre-dexed/debug/classes_d0a035f63e787b9c81c34a13a1c5a4e2fc798169.jar" />
+    </item>
+
+</items>

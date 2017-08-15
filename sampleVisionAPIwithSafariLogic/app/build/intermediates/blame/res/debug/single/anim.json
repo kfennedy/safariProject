@@ -1,0 +1,66 @@
+[
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/design_fab_out.xml",
+        "source": "/Users/katherine/.android/build-cache/aa370e7c5504e7f2e7138ea4b4d377f5070eb4ce/output/res/anim/design_fab_out.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/design_bottom_sheet_slide_out.xml",
+        "source": "/Users/katherine/.android/build-cache/aa370e7c5504e7f2e7138ea4b4d377f5070eb4ce/output/res/anim/design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/design_fab_in.xml",
+        "source": "/Users/katherine/.android/build-cache/aa370e7c5504e7f2e7138ea4b4d377f5070eb4ce/output/res/anim/design_fab_in.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/design_snackbar_out.xml",
+        "source": "/Users/katherine/.android/build-cache/aa370e7c5504e7f2e7138ea4b4d377f5070eb4ce/output/res/anim/design_snackbar_out.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/design_snackbar_in.xml",
+        "source": "/Users/katherine/.android/build-cache/aa370e7c5504e7f2e7138ea4b4d377f5070eb4ce/output/res/anim/design_snackbar_in.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/design_bottom_sheet_slide_in.xml",
+        "source": "/Users/katherine/.android/build-cache/aa370e7c5504e7f2e7138ea4b4d377f5070eb4ce/output/res/anim/design_bottom_sheet_slide_in.xml"
+    },
+    {
+        "merged": "/Users/katherine/Desktop/android-vision-master 2/visionSamples/barcode-reader/app/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/katherine/.android/build-cache/3b8db82ade750b310b87812da45acd4209e0d009/output/res/anim/abc_slide_out_top.xml"
+    }
+]
