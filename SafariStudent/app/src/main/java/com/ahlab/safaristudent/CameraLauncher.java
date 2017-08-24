@@ -195,7 +195,7 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
     public void notifyBarcode(Barcode barcode) {
 
         timer.cancel();
-        System.out.println("============ notifyBarcode cancels timer =============");
+//        System.out.println("============ notifyBarcode cancels timer =============");
 
         if( valueBeingProccessed == false )
         {
@@ -266,7 +266,7 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
             }
         });
         timer.cancel();
-        System.out.println("============ processInteraction cancels timer =============");
+//        System.out.println("============ processInteraction cancels timer =============");
     }
 
     public void processMessage0(){
@@ -318,18 +318,18 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
     // trigger temp alert
     public void startSM1(int duration, final int interval){
 
-        System.out.println("============ SM 1 started =============");
+//        System.out.println("============ SM 1 started =============");
         if(timer != null) {
             timer.cancel();
         }
 
         timer = new CountDownTimer(duration, interval) {
             public void onTick(long millisUntilFinished) {
-                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
+//                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
             }
 
             public void onFinish() {
-                System.out.println("========== SM 1 completed ============");
+//                System.out.println("========== SM 1 completed ============");
                 String tempMessage = messagesList.get(messagesList.size()-2).getMessageContent();
                 tts.speak(replaceSubString(tempMessage), TextToSpeech.QUEUE_ADD, null);
 
@@ -347,18 +347,18 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
     // trigger urgent alert
     public void startSM2(int duration, final int interval){
 
-        System.out.println("============ SM 2 started =============");
+//        System.out.println("============ SM 2 started =============");
         if(timer != null) {
             timer.cancel();
         }
 
         timer = new CountDownTimer(duration, interval) {
             public void onTick(long millisUntilFinished) {
-                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
+//                System.out.println("================= "+String.valueOf(interval/1000)+" second(s) has passed ==============");
             }
 
             public void onFinish() {
-                System.out.println("========== SM 2 completed ============");
+//                System.out.println("========== SM 2 completed ============");
                 String alertMessage = messagesList.get(messagesList.size()-1).getMessageContent();
                 tts.speak(replaceSubString(alertMessage), TextToSpeech.QUEUE_ADD, null);
 
@@ -407,7 +407,7 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
         if (mPreview != null) {
             mPreview.stop();
             timer.cancel();
-            System.out.println("============ SM cancelled =============");
+//            System.out.println("============ SM cancelled =============");
         }
     }
 
@@ -417,7 +417,7 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
         if (mPreview != null) {
             mPreview.release();
             timer.cancel();
-            System.out.println("============ SM cancelled =============");
+//            System.out.println("============ SM cancelled =============");
 
         }
     }
@@ -426,7 +426,7 @@ public final class CameraLauncher extends Activity implements BarcodeNotifier, T
     protected void onStop() {
         super.onStop();
         timer.cancel();
-        System.out.println("============ SM cancelled =============");
+//        System.out.println("============ SM cancelled =============");
 
     }
 
